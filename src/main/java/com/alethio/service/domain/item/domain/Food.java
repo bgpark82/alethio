@@ -20,5 +20,5 @@ public class Food {
 
     private String name;
 
-    private String quantity;
+    private int quantity;
 }

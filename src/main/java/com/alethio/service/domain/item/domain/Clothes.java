@@ -17,5 +17,5 @@ public class Clothes {
 
     private String name;
 
-    private String quantity;
+    private int quantity;
 }
