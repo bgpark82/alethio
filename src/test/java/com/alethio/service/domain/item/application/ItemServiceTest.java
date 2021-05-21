@@ -1,15 +1,14 @@
 package com.alethio.service.domain.item.application;
 
-import com.alethio.service.domain.item.domain.Clothes;
 import com.alethio.service.domain.item.domain.Food;
 import com.alethio.service.domain.item.domain.FoodRepository;
 import com.alethio.service.domain.item.dto.ItemRequest;
+import com.alethio.service.domain.item.dto.ItemRequestStub;
+import com.alethio.service.domain.item.dto.ItemStub;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Optional;
 
@@ -22,8 +21,8 @@ import static org.mockito.Mockito.when;
 class ItemServiceTest {
 
     ItemService itemService;
-    @Mock
-    FoodRepository foodRepository;
+
+    @Mock FoodRepository foodRepository;
 
     @BeforeEach
     void setUp() {
@@ -35,16 +34,9 @@ class ItemServiceTest {
     @Test
     void getClothes() {
         // given
-        ItemRequest itemRequest = new ItemRequest();
-        ReflectionTestUtils.setField(itemRequest, "itemType", "food");
-        ReflectionTestUtils.setField(itemRequest, "id", 1L);
-
-        Food mock = new Food();
-        ReflectionTestUtils.setField(mock, "id", 1L);
-        ReflectionTestUtils.setField(mock, "quantity", 100);
-        ReflectionTestUtils.setField(mock, "name", "떡볶이");
-
-        when(foodRepository.findById(anyLong())).thenReturn(Optional.of(mock));
+        ItemRequest itemRequest = ItemRequestStub.of("food", 1L);
+        Food stub = ItemStub.of(1L, 100, "떡볶이");
+        when(foodRepository.findById(anyLong())).thenReturn(Optional.of(stub));
 
         // when
         Food food = itemService.getItem(itemRequest);
