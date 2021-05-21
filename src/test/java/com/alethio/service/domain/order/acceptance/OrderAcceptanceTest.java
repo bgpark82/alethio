@@ -5,14 +5,13 @@ import com.alethio.service.domain.order.dto.OrderRequestStub;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+
+import static com.alethio.service.domain.order.step.OrderStep.*;
 
 @DisplayName("주문 관련 인수 테스트")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -30,17 +29,16 @@ public class OrderAcceptanceTest {
     @Test
     void orderFood() {
         // given
-        OrderRequest request = OrderRequestStub.of("test@test.com", "구매자", "01099999999", "food", 1);
+        OrderRequest request = 주문_생성_스텁("test@test.com", "구매자", "01099999999", "food", 1L);
 
         // when
-        ExtractableResponse<Response> response = RestAssured
-                .given().log().all()
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(request)
-                .when().post("/order")
-                .then().log().all().extract();
+        ExtractableResponse<Response> response = 주문_생성_요청(request);
 
         // then
-        Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        주문_생성_됨(response);
     }
+
+
+
+
 }

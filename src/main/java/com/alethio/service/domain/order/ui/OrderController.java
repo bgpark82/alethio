@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
     @PostMapping("/order")
-    public ResponseEntity orderCloth(@RequestBody OrderRequest request) {
+    public ResponseEntity orderClothes(@RequestBody OrderRequest request) {
         System.out.println(request);
         return ResponseEntity.ok().build();
     }
