@@ -1,2 +1,2 @@
-INSERT INTO CLOTHES(NAME, quantity) VALUES ('떡볶이',100);
-INSERT INTO FOOD(NAME, quantity) VALUES ('A청바지',100);
+INSERT INTO CLOTHES(NAME, quantity) VALUES ('A청바지',100);
+INSERT INTO FOOD(NAME, quantity) VALUES ('떡볶이',100);

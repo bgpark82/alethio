@@ -22,6 +22,6 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         ExtractableResponse<Response> response = 주문_생성_요청(request);
 
         // then
-        주문_생성_됨(response);
+        주문_생성_됨(response, "떡볶이", 100);
     }
 }
