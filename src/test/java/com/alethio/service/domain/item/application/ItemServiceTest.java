@@ -5,6 +5,7 @@ import com.alethio.service.domain.item.domain.FoodRepository;
 import com.alethio.service.domain.item.dto.ItemRequest;
 import com.alethio.service.domain.item.dto.ItemRequestStub;
 import com.alethio.service.domain.item.dto.ItemStub;
+import com.alethio.service.exception.ItemNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ class ItemServiceTest {
 
     @DisplayName("음식을 조회한다")
     @Test
-    void getClothes() {
+    void getFood() {
         // given
         ItemRequest itemRequest = ItemRequestStub.of("food", 1L);
         Food stub = ItemStub.of(1L, 100, "떡볶이");
@@ -49,13 +50,14 @@ class ItemServiceTest {
 
     @DisplayName("음식을 조회 시, 음식이 존재하지 않으면 에러를 발생시킨다 ")
     @Test
-    void getClothes_IfClothesIsNull_ThrowException() {
+    void getFood_IfClothesIsNull_ThrowException() {
         // given
         ItemRequest itemRequest = ItemRequestStub.of("food", 1L);
         when(foodRepository.findById(anyLong())).thenReturn(Optional.empty());
 
         // when then
         assertThatThrownBy(() -> itemService.getItem(itemRequest))
-                .isInstanceOf(RuntimeException.class);
+                .hasMessage("존재하지 않는 아이템입니다.")
+                .isInstanceOf(ItemNotFoundException.class);
     }
 }
