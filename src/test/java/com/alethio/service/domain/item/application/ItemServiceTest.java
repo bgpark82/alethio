@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -44,5 +45,17 @@ class ItemServiceTest {
         // then
         assertThat(food.getName()).isEqualTo("떡볶이");
         assertThat(food.getQuantity()).isEqualTo(100);
+    }
+
+    @DisplayName("음식을 조회 시, 음식이 존재하지 않으면 에러를 발생시킨다 ")
+    @Test
+    void getClothes_IfClothesIsNull_ThrowException() {
+        // given
+        ItemRequest itemRequest = ItemRequestStub.of("food", 1L);
+        when(foodRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+        // when then
+        assertThatThrownBy(() -> itemService.getItem(itemRequest))
+                .isInstanceOf(RuntimeException.class);
     }
 }
