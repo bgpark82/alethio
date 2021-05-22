@@ -26,22 +26,26 @@ class ItemServiceTest {
 
     @Mock FoodRepository foodRepository;
 
+    ItemRequest itemRequestStub;
+    Food foodStub;
+
     @BeforeEach
     void setUp() {
         foodRepository = mock(FoodRepository.class);
         itemService = new ItemService(foodRepository);
+
+        itemRequestStub = ItemRequestStub.of("food", 1L);
+        foodStub = ItemStub.of(1L, 100, "떡볶이");
     }
 
     @DisplayName("음식을 조회한다")
     @Test
     void getFood() {
         // given
-        ItemRequest itemRequest = ItemRequestStub.of("food", 1L);
-        Food stub = ItemStub.of(1L, 100, "떡볶이");
-        when(foodRepository.findById(anyLong())).thenReturn(Optional.of(stub));
+        when(foodRepository.findById(anyLong())).thenReturn(Optional.of(foodStub));
 
         // when
-        Food food = itemService.getItem(itemRequest);
+        Food food = itemService.getItem(itemRequestStub);
 
         // then
         assertThat(food.getName()).isEqualTo("떡볶이");
@@ -52,11 +56,10 @@ class ItemServiceTest {
     @Test
     void getFood_IfClothesIsNull_ThrowException() {
         // given
-        ItemRequest itemRequest = ItemRequestStub.of("food", 1L);
         when(foodRepository.findById(anyLong())).thenReturn(Optional.empty());
 
         // when then
-        assertThatThrownBy(() -> itemService.getItem(itemRequest))
+        assertThatThrownBy(() -> itemService.getItem(itemRequestStub))
                 .hasMessage("존재하지 않는 아이템입니다.")
                 .isInstanceOf(ItemNotFoundException.class);
     }
