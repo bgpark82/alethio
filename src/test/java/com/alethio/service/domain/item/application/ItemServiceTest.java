@@ -100,4 +100,20 @@ class ItemServiceTest {
                 .hasMessage("재고가 없습니다.")
                 .isInstanceOf(NoItemLeftException.class);
     }
+
+    @DisplayName("음식 조회 시, 재고가 10개 미만이면 입고요청을 한다")
+    @Test
+    void getFood_IfLessThan10_StockRequest() {
+        // given
+        Food emptyQuantity = ItemStub.of(1L, 10, 떡볶이);
+        when(foodRepository.findById(anyLong()))
+                .thenReturn(Optional.of(emptyQuantity));
+
+        // when
+        Food food = itemService.getItem(itemRequestStub);
+
+        // then
+        assertThat(food.getName()).isEqualTo(떡볶이);
+        assertThat(food.getQuantity()).isEqualTo(9);
+    }
 }
