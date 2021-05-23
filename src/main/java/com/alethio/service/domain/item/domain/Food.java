@@ -47,6 +47,6 @@ public class Food {
     }
 
     public boolean hasShortStock() {
-        return this.quantity < 10;
+        return this.quantity < STOCK_REQUEST_THRESHOLD;
     }
 }
