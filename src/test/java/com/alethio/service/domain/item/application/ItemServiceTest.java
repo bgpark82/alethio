@@ -42,7 +42,8 @@ class ItemServiceTest {
     @Test
     void getFood() {
         // given
-        when(foodRepository.findById(anyLong())).thenReturn(Optional.of(foodStub));
+        when(foodRepository.findById(anyLong()))
+                .thenReturn(Optional.of(foodStub));
 
         // when
         Food food = itemService.getItem(itemRequestStub);
@@ -56,11 +57,27 @@ class ItemServiceTest {
     @Test
     void getFood_IfClothesIsNull_ThrowException() {
         // given
-        when(foodRepository.findById(anyLong())).thenReturn(Optional.empty());
+        when(foodRepository.findById(anyLong()))
+                .thenReturn(Optional.empty());
 
         // when then
         assertThatThrownBy(() -> itemService.getItem(itemRequestStub))
                 .hasMessage("존재하지 않는 아이템입니다.")
                 .isInstanceOf(ItemNotFoundException.class);
+    }
+
+    @DisplayName("음식 조회 시, 재고가 1 감소한다")
+    @Test
+    void getFood_IfSuccess_DecreaseQuantity() {
+        // given
+        when(foodRepository.findById(anyLong()))
+                .thenReturn(Optional.of(foodStub));
+
+        // when
+        Food food = itemService.getItem(itemRequestStub);
+
+        // then
+        assertThat(food.getName()).isEqualTo("떡볶이");
+        assertThat(food.getQuantity()).isEqualTo(99);
     }
 }
