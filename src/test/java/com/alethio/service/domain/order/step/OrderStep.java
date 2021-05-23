@@ -15,9 +15,15 @@ public class OrderStep {
 
     public static void 주문_생성_됨(ExtractableResponse<Response> response, String name, int quantity) {
         final Food food = response.as(Food.class);
+        // TODO: 201 응답
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
         assertThat(food.getName()).isEqualTo(name);
         assertThat(food.getQuantity()).isEqualTo(quantity);
+    }
+
+    public static void 주문_생성_실패_됨(ExtractableResponse<Response> response) {
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+        // TODO: BusinessException에서 body 객체 생성 (ex. ErrorCode)
     }
 
     public static ExtractableResponse<Response> 주문_생성_요청(OrderRequest request) {

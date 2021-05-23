@@ -24,4 +24,17 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         // then
         주문_생성_됨(response, "떡볶이", 100);
     }
+
+    @DisplayName("음식을 주문한다")
+    @Test
+    void orderFoodError() {
+        // given
+        OrderRequest request = 주문_생성_스텁("test@test.com", "구매자", "01099999999", "food", 2L);
+
+        // when
+        ExtractableResponse<Response> response = 주문_생성_요청(request);
+
+        // then
+        주문_생성_실패_됨(response);
+    }
 }
