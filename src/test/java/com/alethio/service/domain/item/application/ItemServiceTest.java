@@ -85,4 +85,17 @@ class ItemServiceTest {
         assertThat(food.getName()).isEqualTo(떡볶이);
         assertThat(food.getQuantity()).isEqualTo(남은_재고);
     }
+
+    @DisplayName("음식 조회 시, 재고가 0이면 에러를 발생시킨다")
+    @Test
+    void getFood_IfNoQuantityLeft_ThrowException() {
+        // given
+        Food emptyQuantity = ItemStub.of(1L, 0, 떡볶이);
+        when(foodRepository.findById(anyLong()))
+                .thenReturn(Optional.of(emptyQuantity));
+
+        // when then
+        assertThatThrownBy(() -> itemService.getItem(itemRequestStub))
+                .isInstanceOf(RuntimeException.class);
+    }
 }
