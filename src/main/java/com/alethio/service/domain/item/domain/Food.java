@@ -14,7 +14,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 public class Food {
 
-    private static final int MINIMUM_QUANTITY = 0;
+    private static final int ZERO_QUANTITY = 0;
+    private static final int STOCK_REQUEST_THRESHOLD = 10;
     private static final int DECREASE_AMOUNT = 1;
 
     @Id
@@ -26,10 +27,16 @@ public class Food {
 
     private int quantity;
 
+    // TODO: 객체로 분리
     public void decreaseQuantity() {
-        if(this.quantity == MINIMUM_QUANTITY) {
+        final int restQuantity = this.quantity - DECREASE_AMOUNT;
+        checkEmpty(restQuantity);
+        this.quantity = restQuantity;
+    }
+
+    private void checkEmpty(int restQuantity) {
+        if(restQuantity < ZERO_QUANTITY) {
             throw new NoItemLeftException();
         }
-        this.quantity -= DECREASE_AMOUNT;
     }
 }
