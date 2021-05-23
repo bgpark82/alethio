@@ -13,6 +13,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 public class Food {
 
+    private static final int DECREASE_AMOUNT = 1;
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "FOOD_ID")
@@ -21,4 +23,8 @@ public class Food {
     private String name;
 
     private int quantity;
+
+    public void decreaseQuantity() {
+        this.quantity -= DECREASE_AMOUNT;
+    }
 }

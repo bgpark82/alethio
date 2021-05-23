@@ -14,6 +14,12 @@ public class ItemService {
     private final FoodRepository foodRepository;
 
     public Food getItem(ItemRequest itemRequest) {
+        final Food food = getFood(itemRequest);
+        food.decreaseQuantity();
+        return food;
+    }
+
+    private Food getFood(ItemRequest itemRequest) {
         return foodRepository.findById(itemRequest.getId())
                 .orElseThrow(ItemNotFoundException::new);
     }
