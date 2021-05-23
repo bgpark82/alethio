@@ -28,14 +28,19 @@ class ItemServiceTest {
 
     ItemRequest itemRequestStub;
     Food foodStub;
+    String 떡볶이, 음식_타입;
+    int 남은_재고;
 
     @BeforeEach
     void setUp() {
         foodRepository = mock(FoodRepository.class);
         itemService = new ItemService(foodRepository);
 
-        itemRequestStub = ItemRequestStub.of("food", 1L);
-        foodStub = ItemStub.of(1L, 100, "떡볶이");
+        떡볶이 = "떡볶이";
+        남은_재고 = 99;
+        음식_타입 = "food";
+        itemRequestStub = ItemRequestStub.of(음식_타입, 1L);
+        foodStub = ItemStub.of(1L, 100, 떡볶이);
     }
 
     @DisplayName("음식을 조회한다")
@@ -49,8 +54,8 @@ class ItemServiceTest {
         Food food = itemService.getItem(itemRequestStub);
 
         // then
-        assertThat(food.getName()).isEqualTo("떡볶이");
-        assertThat(food.getQuantity()).isEqualTo(100);
+        assertThat(food.getName()).isEqualTo(떡볶이);
+        assertThat(food.getQuantity()).isEqualTo(남은_재고);
     }
 
     @DisplayName("음식을 조회 시, 음식이 존재하지 않으면 에러를 발생시킨다")
@@ -77,7 +82,7 @@ class ItemServiceTest {
         Food food = itemService.getItem(itemRequestStub);
 
         // then
-        assertThat(food.getName()).isEqualTo("떡볶이");
-        assertThat(food.getQuantity()).isEqualTo(99);
+        assertThat(food.getName()).isEqualTo(떡볶이);
+        assertThat(food.getQuantity()).isEqualTo(남은_재고);
     }
 }
