@@ -6,6 +6,7 @@ import com.alethio.service.domain.item.dto.ItemRequest;
 import com.alethio.service.domain.item.dto.ItemRequestStub;
 import com.alethio.service.domain.item.dto.ItemStub;
 import com.alethio.service.exception.ItemNotFoundException;
+import com.alethio.service.exception.NoItemLeftException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -96,6 +97,7 @@ class ItemServiceTest {
 
         // when then
         assertThatThrownBy(() -> itemService.getItem(itemRequestStub))
-                .isInstanceOf(RuntimeException.class);
+                .hasMessage("재고가 없습니다.")
+                .isInstanceOf(NoItemLeftException.class);
     }
 }

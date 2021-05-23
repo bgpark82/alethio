@@ -1,5 +1,6 @@
 package com.alethio.service.domain.item.domain;
 
+import com.alethio.service.exception.NoItemLeftException;
 import lombok.Getter;
 
 import javax.persistence.Column;
@@ -25,6 +26,10 @@ public class Food {
     private int quantity;
 
     public void decreaseQuantity() {
+        if(this.quantity == 0) {
+            throw new NoItemLeftException();
+        }
         this.quantity -= DECREASE_AMOUNT;
+
     }
 }

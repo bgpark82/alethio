@@ -12,4 +12,9 @@ public class ExceptionController {
     public ResponseEntity handleItemNotFoundException(ItemNotFoundException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
+
+    @ExceptionHandler(NoItemLeftException.class)
+    public ResponseEntity handleNoItemLeftException(NoItemLeftException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
 }
