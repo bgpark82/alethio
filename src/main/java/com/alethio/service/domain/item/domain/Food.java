@@ -14,6 +14,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 public class Food {
 
+    private static final int MINIMUM_QUANTITY = 0;
     private static final int DECREASE_AMOUNT = 1;
 
     @Id
@@ -26,10 +27,9 @@ public class Food {
     private int quantity;
 
     public void decreaseQuantity() {
-        if(this.quantity == 0) {
+        if(this.quantity == MINIMUM_QUANTITY) {
             throw new NoItemLeftException();
         }
         this.quantity -= DECREASE_AMOUNT;
-
     }
 }
