@@ -52,7 +52,7 @@ class ItemServiceTest {
         assertThat(food.getQuantity()).isEqualTo(100);
     }
 
-    @DisplayName("음식을 조회 시, 음식이 존재하지 않으면 에러를 발생시킨다 ")
+    @DisplayName("음식을 조회 시, 음식이 존재하지 않으면 에러를 발생시킨다")
     @Test
     void getFood_IfClothesIsNull_ThrowException() {
         // given

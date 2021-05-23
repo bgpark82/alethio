@@ -25,9 +25,9 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         주문_생성_됨(response, "떡볶이", 100);
     }
 
-    @DisplayName("음식을 주문한다")
+    @DisplayName("음식 주문 시, 음식이 존재하지 않으면 에러를 발생시킨다")
     @Test
-    void orderFoodError() {
+    void orderFood_IfClothesIsNull_ThrowException() {
         // given
         OrderRequest request = 주문_생성_스텁("test@test.com", "구매자", "01099999999", "food", 2L);
 
