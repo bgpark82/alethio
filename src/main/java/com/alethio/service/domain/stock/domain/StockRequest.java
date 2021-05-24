@@ -20,4 +20,12 @@ public class StockRequest {
     private String code;
 
     private int amount;
+
+    public static StockRequest create(String name) {
+        StockRequest stockRequest = new StockRequest();
+        stockRequest.code = "아마존123";
+        stockRequest.name = name;
+        stockRequest.amount = 100;
+        return stockRequest;
+    }
 }
