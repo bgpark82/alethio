@@ -30,9 +30,6 @@ public class Food {
 
     private int quantity;
 
-    @OneToMany(mappedBy = "item", cascade = PERSIST, fetch = LAZY)
-    private List<StockRequest> request;
-
     // TODO: 객체로 분리
     public void decreaseQuantity() {
         final int restQuantity = this.quantity - DECREASE_AMOUNT;
