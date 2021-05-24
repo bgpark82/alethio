@@ -4,10 +4,6 @@ import lombok.Getter;
 
 import javax.persistence.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -21,14 +17,15 @@ public class Order {
     @Column(name = "ORDER_ID")
     private Long id;
 
-    private String userEmail;
-
     @OneToOne(mappedBy = "order", cascade = PERSIST)
     private OrderItem orderItem;
 
-    public static Order create(final String userEmail, final OrderItem orderItem) {
+    @OneToOne(cascade = PERSIST)
+    private OrderUser orderUser;
+
+    public static Order create(final OrderUser orderUser, final OrderItem orderItem) {
         final Order order = new Order();
-        order.userEmail = userEmail;
+        order.orderUser = orderUser;
         order.addOrderItem(orderItem);
         return order;
     }

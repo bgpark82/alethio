@@ -5,8 +5,10 @@ import com.alethio.service.domain.item.domain.Food;
 import com.alethio.service.domain.order.domain.Order;
 import com.alethio.service.domain.order.domain.OrderItem;
 import com.alethio.service.domain.order.domain.OrderRepository;
+import com.alethio.service.domain.order.domain.OrderUser;
 import com.alethio.service.domain.order.dto.OrderRequest;
 import com.alethio.service.domain.order.dto.OrderResponse;
+import com.alethio.service.domain.order.dto.OrderUserRequest;
 import com.alethio.service.domain.stock.application.StockRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,8 +32,14 @@ public class OrderService {
                 food.getName(),
                 food.getQuantity());
 
+        final OrderUserRequest userRequest = request.getUserRequest();
+        final OrderUser orderUser = OrderUser.create(
+                userRequest.getContactName(),
+                userRequest.getContactEmail(),
+                userRequest.getMobile());
+
         final Order order = Order.create(
-                request.getContactEmail(),
+                orderUser,
                 orderItem);
 
         orderRepository.save(order);

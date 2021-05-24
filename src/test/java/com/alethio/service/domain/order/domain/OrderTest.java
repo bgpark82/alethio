@@ -13,12 +13,13 @@ class OrderTest {
     void create() {
         // given
         OrderItem orderItem = OrderItem.create(1L, "떡볶이", 10);
+        OrderUser orderuser = OrderUser.create("bgpark", "bgpark82@gmail.com", "01045808682");
 
         // when
-        Order order = Order.create("bgpark82@gmail.com", orderItem);
+        Order order = Order.create(orderuser, orderItem);
 
         // then
         assertThat(order.getOrderItem()).isEqualTo(orderItem);
-        assertThat(order.getUserEmail()).isEqualTo("bgpark82@gmail.com");
+        assertThat(order.getOrderUser()).isEqualTo(orderuser);
     }
 }

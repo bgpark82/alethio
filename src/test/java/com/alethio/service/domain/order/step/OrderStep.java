@@ -17,7 +17,7 @@ public class OrderStep {
         final OrderResponse orderResponse = response.as(OrderResponse.class);
         // TODO: 201 응답
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
-        assertThat(orderResponse.getUserEmail()).isEqualTo(userEmail);
+        assertThat(orderResponse.getOrderUser().getEmail()).isEqualTo(userEmail);
         assertThat(orderResponse.getOrderItem().getName()).isEqualTo(itemName);
         assertThat(orderResponse.getOrderItem().getQuantity()).isEqualTo(quantity);
     }
