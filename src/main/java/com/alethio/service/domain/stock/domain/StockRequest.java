@@ -12,6 +12,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 public class StockRequest {
 
+    private static final String AMAZON_CODE = "아마존123";
+    private static final int REQUEST_AMOUNT = 100;
+
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
@@ -23,9 +26,9 @@ public class StockRequest {
 
     public static StockRequest create(String name) {
         StockRequest stockRequest = new StockRequest();
-        stockRequest.code = "아마존123";
+        stockRequest.code = AMAZON_CODE;
         stockRequest.name = name;
-        stockRequest.amount = 100;
+        stockRequest.amount = REQUEST_AMOUNT;
         return stockRequest;
     }
 }
