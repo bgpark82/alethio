@@ -1,6 +1,6 @@
 package com.alethio.service.domain.item.domain;
 
-import com.alethio.service.domain.item.dto.ItemStub;
+import com.alethio.service.domain.item.dto.FoodStub;
 import com.alethio.service.exception.NoItemLeftException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ class FoodTest {
     @Test
     void decreaseQuantity_IfNoQuantityLeft_ThrowException() {
         // given
-        Food food = ItemStub.of(1L, 0, "떡볶이");
+        Food food = FoodStub.of(1L, 0, "떡볶이");
 
         // when then
         assertThatThrownBy(() -> food.decreaseQuantity())
@@ -26,7 +26,7 @@ class FoodTest {
     @Test
     void hasShortStock_IfLessThan10_StockRequest() {
         // given
-        Food food = ItemStub.of(1L, 9, "떡볶이");
+        Food food = FoodStub.of(1L, 9, "떡볶이");
 
         // when
         boolean hasEnoughStock = food.hasShortStock();

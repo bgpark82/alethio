@@ -1,7 +1,7 @@
 package com.alethio.service.domain.stock.application;
 
 import com.alethio.service.domain.item.domain.Food;
-import com.alethio.service.domain.item.dto.ItemStub;
+import com.alethio.service.domain.item.dto.FoodStub;
 import com.alethio.service.domain.stock.domain.StockRequestRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +27,7 @@ class StockRequestServiceTest {
     @Test
     void requestStock() {
         // given
-        Food 떡볶이 = ItemStub.of(1L, 9, "떡볶이");
+        Food 떡볶이 = FoodStub.of(1L, 9, "떡볶이");
 
         // when
         stockRequestService.requestStock(떡볶이);

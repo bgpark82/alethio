@@ -3,7 +3,7 @@ package com.alethio.service.domain.item.dto;
 import com.alethio.service.domain.item.domain.Food;
 import org.springframework.test.util.ReflectionTestUtils;
 
-public class ItemStub {
+public class FoodStub {
 
     public static Food of(Long id, int quantity, String name) {
         Food mock = new Food();

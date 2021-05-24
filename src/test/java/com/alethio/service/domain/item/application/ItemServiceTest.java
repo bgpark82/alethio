@@ -4,7 +4,7 @@ import com.alethio.service.domain.item.domain.Food;
 import com.alethio.service.domain.item.domain.FoodRepository;
 import com.alethio.service.domain.item.dto.ItemRequest;
 import com.alethio.service.domain.item.dto.ItemRequestStub;
-import com.alethio.service.domain.item.dto.ItemStub;
+import com.alethio.service.domain.item.dto.FoodStub;
 import com.alethio.service.exception.ItemNotFoundException;
 import com.alethio.service.exception.NoItemLeftException;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,7 +41,7 @@ class ItemServiceTest {
         남은_재고 = 99;
         음식_타입 = "food";
         itemRequestStub = ItemRequestStub.of(음식_타입, 1L);
-        foodStub = ItemStub.of(1L, 100, 떡볶이);
+        foodStub = FoodStub.of(1L, 100, 떡볶이);
     }
 
     @DisplayName("음식을 조회한다")
@@ -91,9 +91,9 @@ class ItemServiceTest {
     @Test
     void getFood_IfNoQuantityLeft_ThrowException() {
         // given
-        Food emptyQuantity = ItemStub.of(1L, 0, 떡볶이);
+        Food emptyFood = FoodStub.of(1L, 0, 떡볶이);
         when(foodRepository.findById(anyLong()))
-                .thenReturn(Optional.of(emptyQuantity));
+                .thenReturn(Optional.of(emptyFood));
 
         // when then
         assertThatThrownBy(() -> itemService.getItem(itemRequestStub))
@@ -105,9 +105,9 @@ class ItemServiceTest {
     @Test
     void getFood_IfLessThan10_StockRequest() {
         // given
-        Food emptyQuantity = ItemStub.of(1L, 10, 떡볶이);
+        Food shortFood = FoodStub.of(1L, 10, 떡볶이);
         when(foodRepository.findById(anyLong()))
-                .thenReturn(Optional.of(emptyQuantity));
+                .thenReturn(Optional.of(shortFood));
 
         // when
         Food food = itemService.getItem(itemRequestStub);

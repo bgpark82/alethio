@@ -2,7 +2,7 @@ package com.alethio.service.domain.order.acceptance;
 
 import com.alethio.service.common.AcceptanceTest;
 import com.alethio.service.domain.item.domain.FoodRepository;
-import com.alethio.service.domain.item.dto.ItemStub;
+import com.alethio.service.domain.item.dto.FoodStub;
 import com.alethio.service.domain.order.dto.OrderRequest;
 import com.alethio.service.domain.stock.domain.StockRequestRepository;
 import io.restassured.response.ExtractableResponse;
@@ -52,7 +52,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
     @Test
     void orderFood_IfFoodLessThan10Left_RequestMoreStock() {
         // given
-        foodRepository.save(ItemStub.of(null, 9, "어묵"));
+        foodRepository.save(FoodStub.of(null, 9, "어묵"));
         final OrderRequest request = 주문_생성_스텁("test@test.com", "구매자", "01099999999", "food", 2L);
 
         // when
