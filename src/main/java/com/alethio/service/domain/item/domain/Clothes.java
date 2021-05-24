@@ -8,14 +8,10 @@ import javax.persistence.Id;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-public class Clothes {
+public class Clothes extends Item{
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "CLOTHES_ID")
     private Long id;
-
-    private String name;
-
-    private int quantity;
 }
