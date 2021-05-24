@@ -1,8 +1,8 @@
 package com.alethio.service.domain.order.step;
 
-import com.alethio.service.domain.item.domain.Food;
 import com.alethio.service.domain.order.dto.OrderRequest;
 import com.alethio.service.domain.order.dto.OrderRequestStub;
+import com.alethio.service.domain.order.dto.OrderResponse;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -13,12 +13,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderStep {
 
-    public static void 주문_생성_됨(ExtractableResponse<Response> response, String name, int quantity) {
-        final Food food = response.as(Food.class);
+    public static void 주문_생성_됨(ExtractableResponse<Response> response, String userEmail, String itemName, int quantity) {
+        final OrderResponse orderResponse = response.as(OrderResponse.class);
         // TODO: 201 응답
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
-        assertThat(food.getName()).isEqualTo(name);
-        assertThat(food.getQuantity()).isEqualTo(quantity);
+        assertThat(orderResponse.getUserEmail()).isEqualTo(userEmail);
+        assertThat(orderResponse.getOrderItem().getName()).isEqualTo(itemName);
+        assertThat(orderResponse.getOrderItem().getQuantity()).isEqualTo(quantity);
     }
 
     public static void 주문_생성_실패_됨(ExtractableResponse<Response> response) {

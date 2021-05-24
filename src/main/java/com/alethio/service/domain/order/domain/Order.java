@@ -21,19 +21,20 @@ public class Order {
     @Column(name = "ORDER_ID")
     private Long id;
 
-    private String userName;
+    private String userEmail;
 
-    @OneToMany(mappedBy = "order", cascade = PERSIST)
-    private List<OrderItem> orderItems = new ArrayList<>();
+    @OneToOne(mappedBy = "order", cascade = PERSIST)
+    private OrderItem orderItem;
 
-    public static Order create(final String userName, final OrderItem ...orderItem) {
+    public static Order create(final String userEmail, final OrderItem orderItem) {
         final Order order = new Order();
-        order.userName = userName;
-        Arrays.stream(orderItem).forEach(oi -> oi.addOrder(order));
+        order.userEmail = userEmail;
+        order.addOrderItem(orderItem);
         return order;
     }
 
     public void addOrderItem(OrderItem orderItem) {
-        this.orderItems.add(orderItem);
+        this.orderItem = orderItem;
+        orderItem.addOrder(this);
     }
 }

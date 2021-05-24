@@ -32,7 +32,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         ExtractableResponse<Response> response = 주문_생성_요청(request);
 
         // then
-        주문_생성_됨(response, "떡볶이", 99);
+        주문_생성_됨(response, "test@test.com","떡볶이", 99);
     }
 
     @DisplayName("음식 주문 시, 음식이 존재하지 않으면 에러를 발생시킨다")
@@ -60,6 +60,6 @@ public class OrderAcceptanceTest extends AcceptanceTest {
 
         // then
         assertThat(stockRequestRepository.findById(1L).get().getAmount()).isEqualTo(100);
-        주문_생성_됨(response, "어묵", 8);
+        주문_생성_됨(response, "test@test.com", "어묵",8);
     }
 }

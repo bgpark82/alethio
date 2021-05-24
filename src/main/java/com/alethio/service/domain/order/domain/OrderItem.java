@@ -14,20 +14,25 @@ public class OrderItem {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = LAZY)
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name = "ORDER_ID")
     private Order order;
 
     private Long foodId;
 
-    public static OrderItem create(Long foodId) {
+    private String foodName;
+
+    private int foodQuantity;
+
+    public static OrderItem create(Long foodId, String foodName, int foodQuantity) {
         final OrderItem orderItem = new OrderItem();
         orderItem.foodId = foodId;
+        orderItem.foodName = foodName;
+        orderItem.foodQuantity = foodQuantity;
         return orderItem;
     }
 
     public void addOrder(Order order) {
-        order.addOrderItem(this);
         this.order = order;
     }
 }

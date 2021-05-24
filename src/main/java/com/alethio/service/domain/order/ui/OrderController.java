@@ -1,8 +1,8 @@
 package com.alethio.service.domain.order.ui;
 
-import com.alethio.service.domain.item.domain.Food;
 import com.alethio.service.domain.order.application.OrderService;
 import com.alethio.service.domain.order.dto.OrderRequest;
+import com.alethio.service.domain.order.dto.OrderResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +19,7 @@ public class OrderController {
 
     @PostMapping("/order")
     public ResponseEntity orderClothes(@RequestBody OrderRequest request) {
-        final Food food = orderService.orderItem(request);
-        return ResponseEntity.ok().body(food);
+        final OrderResponse response = orderService.orderItem(request);
+        return ResponseEntity.ok().body(response);
     }
 }

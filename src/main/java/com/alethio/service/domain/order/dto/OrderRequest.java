@@ -14,8 +14,12 @@ public class OrderRequest {
     @JsonProperty("items")
     private ItemRequest itemRequest;
 
+    public String getContactEmail() {
+        return this.contactInfo.getContactEmail();
+    }
+
     @Getter
-    static class ContactInfo {
+    public static class ContactInfo {
         private String contactEmail;
         private String contactName;
         private String mobile;

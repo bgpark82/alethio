@@ -12,15 +12,13 @@ class OrderTest {
     @Test
     void create() {
         // given
-        OrderItem orderItem1 = OrderItem.create(1L);
-        OrderItem orderItem2 = OrderItem.create(2L);
+        OrderItem orderItem = OrderItem.create(1L, "떡볶이", 10);
 
         // when
-        Order order = Order.create("bgpark", orderItem1, orderItem2);
+        Order order = Order.create("bgpark82@gmail.com", orderItem);
 
         // then
-        assertThat(order.getOrderItems()).containsExactly(orderItem1, orderItem2);
-        assertThat(orderItem1.getOrder()).isEqualTo(order);
-        assertThat(orderItem2.getOrder()).isEqualTo(order);
+        assertThat(order.getOrderItem()).isEqualTo(orderItem);
+        assertThat(order.getUserEmail()).isEqualTo("bgpark82@gmail.com");
     }
 }
