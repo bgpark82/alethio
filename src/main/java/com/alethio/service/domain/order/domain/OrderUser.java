@@ -21,11 +21,16 @@ public class OrderUser {
 
     private String mobile;
 
+    // TODO: 어노테이션으로 리펙토링
     public static OrderUser create(String contactName, String contactEmail, String mobile) {
         OrderUser orderUser = new OrderUser();
-        orderUser.name = contactName;
-        orderUser.email = contactEmail;
-        orderUser.mobile = mobile;
+        orderUser.name = trim(contactName);
+        orderUser.email = trim(contactEmail);
+        orderUser.mobile = trim(mobile);
         return orderUser;
+    }
+
+    private static String trim(String value) {
+        return value.trim();
     }
 }
