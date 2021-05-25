@@ -24,4 +24,6 @@ public abstract class Item {
     public String getName() {
         return name;
     }
+
+    public abstract Long getId();
 }

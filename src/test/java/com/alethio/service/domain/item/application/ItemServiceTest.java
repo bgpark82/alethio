@@ -1,7 +1,9 @@
 package com.alethio.service.domain.item.application;
 
+import com.alethio.service.domain.item.domain.ClothesRepository;
 import com.alethio.service.domain.item.domain.Food;
 import com.alethio.service.domain.item.domain.FoodRepository;
+import com.alethio.service.domain.item.domain.Item;
 import com.alethio.service.domain.item.dto.ItemRequest;
 import com.alethio.service.domain.item.dto.ItemRequestStub;
 import com.alethio.service.domain.item.dto.FoodStub;
@@ -26,6 +28,7 @@ class ItemServiceTest {
     ItemService itemService;
 
     @Mock FoodRepository foodRepository;
+    @Mock ClothesRepository clothesRepository;
 
     ItemRequest itemRequestStub;
     Food foodStub;
@@ -35,7 +38,8 @@ class ItemServiceTest {
     @BeforeEach
     void setUp() {
         foodRepository = mock(FoodRepository.class);
-        itemService = new ItemService(foodRepository);
+        clothesRepository = mock(ClothesRepository.class);
+        itemService = new ItemService(foodRepository, clothesRepository);
 
         떡볶이 = "떡볶이";
         남은_재고 = 99;
@@ -52,7 +56,7 @@ class ItemServiceTest {
                 .thenReturn(Optional.of(foodStub));
 
         // when
-        Food food = itemService.getItem(itemRequestStub);
+        Item food = itemService.getItem(itemRequestStub);
 
         // then
         assertThat(food.getName()).isEqualTo(떡볶이);
@@ -80,7 +84,7 @@ class ItemServiceTest {
                 .thenReturn(Optional.of(foodStub));
 
         // when
-        Food food = itemService.getItem(itemRequestStub);
+        Item food = itemService.getItem(itemRequestStub);
 
         // then
         assertThat(food.getName()).isEqualTo(떡볶이);
@@ -110,7 +114,7 @@ class ItemServiceTest {
                 .thenReturn(Optional.of(shortFood));
 
         // when
-        Food food = itemService.getItem(itemRequestStub);
+        Item food = itemService.getItem(itemRequestStub);
 
         // then
         assertThat(food.getName()).isEqualTo(떡볶이);

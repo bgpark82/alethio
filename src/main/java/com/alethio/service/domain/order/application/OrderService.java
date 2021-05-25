@@ -1,7 +1,7 @@
 package com.alethio.service.domain.order.application;
 
 import com.alethio.service.domain.item.application.ItemService;
-import com.alethio.service.domain.item.domain.Food;
+import com.alethio.service.domain.item.domain.Item;
 import com.alethio.service.domain.order.domain.Order;
 import com.alethio.service.domain.order.domain.OrderItem;
 import com.alethio.service.domain.order.domain.OrderRepository;
@@ -24,13 +24,13 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     public OrderResponse orderItem(OrderRequest request) {
-        final Food food = itemService.getItem(request.getItemRequest());
-        stockRequestService.requestStock(food);
+        final Item item = itemService.getItem(request.getItemRequest());
+        stockRequestService.requestStock(item);
 
         final OrderItem orderItem = OrderItem.create(
-                food.getId(),
-                food.getName(),
-                food.getQuantity());
+                item.getId(),
+                item.getName(),
+                item.getQuantity());
 
         final OrderUserRequest userRequest = request.getUserRequest();
         final OrderUser orderUser = OrderUser.create(
