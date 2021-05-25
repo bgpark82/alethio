@@ -1,6 +1,6 @@
 package com.alethio.service.domain.stock.application;
 
-import com.alethio.service.domain.item.domain.Food;
+import com.alethio.service.domain.item.domain.food.Food;
 import com.alethio.service.domain.item.dto.FoodStub;
 import com.alethio.service.domain.stock.domain.StockRequestRepository;
 import org.junit.jupiter.api.BeforeEach;

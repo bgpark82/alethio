@@ -1,5 +1,7 @@
 package com.alethio.service.domain.item.domain;
 
+import com.alethio.service.domain.item.domain.clothes.ClothesRepository;
+import com.alethio.service.domain.item.domain.food.FoodRepository;
 import com.alethio.service.domain.item.dto.ItemRequest;
 import com.alethio.service.exception.ItemNotFoundException;
 import lombok.RequiredArgsConstructor;

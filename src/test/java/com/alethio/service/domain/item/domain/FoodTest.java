@@ -1,5 +1,6 @@
 package com.alethio.service.domain.item.domain;
 
+import com.alethio.service.domain.item.domain.food.Food;
 import com.alethio.service.domain.item.dto.FoodStub;
 import com.alethio.service.exception.NoItemLeftException;
 import org.junit.jupiter.api.DisplayName;

@@ -1,7 +1,7 @@
 package com.alethio.service.domain.order.acceptance;
 
 import com.alethio.service.common.AcceptanceTest;
-import com.alethio.service.domain.item.domain.FoodRepository;
+import com.alethio.service.domain.item.domain.food.FoodRepository;
 import com.alethio.service.domain.item.dto.FoodStub;
 import com.alethio.service.domain.order.dto.OrderRequest;
 import com.alethio.service.domain.stock.domain.StockRequestRepository;

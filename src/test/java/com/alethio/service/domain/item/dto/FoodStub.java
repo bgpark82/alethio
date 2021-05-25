@@ -1,6 +1,6 @@
 package com.alethio.service.domain.item.dto;
 
-import com.alethio.service.domain.item.domain.Food;
+import com.alethio.service.domain.item.domain.food.Food;
 import com.alethio.service.domain.item.domain.Stock;
 import org.springframework.test.util.ReflectionTestUtils;
 

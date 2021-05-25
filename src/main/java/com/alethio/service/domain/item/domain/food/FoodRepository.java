@@ -1,4 +1,4 @@
-package com.alethio.service.domain.item.domain;
+package com.alethio.service.domain.item.domain.food;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,5 +1,6 @@
-package com.alethio.service.domain.item.domain;
+package com.alethio.service.domain.item.domain.clothes;
 
+import com.alethio.service.domain.item.domain.Item;
 import lombok.Getter;
 
 import javax.persistence.Column;
@@ -11,10 +12,10 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Getter
 @Entity
-public class Food extends Item{
+public class Clothes extends Item {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "FOOD_ID")
+    @Column(name = "CLOTHES_ID")
     private Long id;
 }
