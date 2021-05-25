@@ -2,6 +2,7 @@ package com.alethio.service.domain.order.application;
 
 import com.alethio.service.domain.item.application.ItemService;
 import com.alethio.service.domain.item.domain.Item;
+import com.alethio.service.domain.item.dto.ItemRequest;
 import com.alethio.service.domain.order.domain.Order;
 import com.alethio.service.domain.order.domain.OrderItem;
 import com.alethio.service.domain.order.domain.OrderRepository;
@@ -24,26 +25,34 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     public OrderResponse orderItem(OrderRequest request) {
-        final Item item = itemService.getItem(request.getItemRequest());
-        stockRequestService.requestStock(item);
-
-        final OrderItem orderItem = OrderItem.create(
-                item.getId(),
-                item.getName(),
-                item.getQuantity());
-
+        final ItemRequest itemRequest = request.getItemRequest();
         final OrderUserRequest userRequest = request.getUserRequest();
-        final OrderUser orderUser = OrderUser.create(
-                userRequest.getContactName(),
-                userRequest.getContactEmail(),
-                userRequest.getMobile());
+        final Item item = itemService.getItem(itemRequest);
+
+        if(item.hasShortStock()) {
+            stockRequestService.requestStock(item.getName(), itemRequest.getItemType());
+        }
 
         final Order order = Order.create(
-                orderUser,
-                orderItem);
+                createOrderUser(userRequest),
+                createOrderItem(item));
 
         orderRepository.save(order);
 
         return OrderResponse.of(order);
+    }
+
+    private OrderUser createOrderUser(OrderUserRequest userRequest) {
+        return OrderUser.create(
+                userRequest.getContactName(),
+                userRequest.getContactEmail(),
+                userRequest.getMobile());
+    }
+
+    private OrderItem createOrderItem(Item item) {
+        return OrderItem.create(
+                item.getId(),
+                item.getName(),
+                item.getQuantity());
     }
 }

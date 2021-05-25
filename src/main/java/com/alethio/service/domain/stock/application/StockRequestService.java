@@ -1,6 +1,5 @@
 package com.alethio.service.domain.stock.application;
 
-import com.alethio.service.domain.item.domain.Item;
 import com.alethio.service.domain.stock.domain.StockRequest;
 import com.alethio.service.domain.stock.domain.StockRequestRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +11,7 @@ public class StockRequestService {
 
     private final StockRequestRepository stockRequestRepository;
 
-    public void requestStock(Item item) {
-        if(item.hasShortStock()) {
-            stockRequestRepository.save(StockRequest.create(item.getName()));
-        }
+    public void requestStock(String itemName, String itemType) {
+        stockRequestRepository.save(StockRequest.create(itemName, itemType));
     }
 }
