@@ -1,7 +1,22 @@
-This is basic ascii docs
+[[order]]
+ifndef::snippets[]
+:snippets: ../../../target/generated-snippets
+endif::[]
 
-include::{snippets}/order/curl-request.adoc[]
+
+== 주문
+
+=== 주문 생성
+
+==== Request
+
 include::{snippets}/order/http-request.adoc[]
 include::{snippets}/order/request-body.adoc[]
+include::{snippets}/order/request-fields.adoc[]
+
+==== Response
+
 include::{snippets}/order/http-response.adoc[]
 include::{snippets}/order/response-body.adoc[]
+include::{snippets}/order/response-fields.adoc[]
+

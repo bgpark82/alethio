@@ -8,8 +8,11 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.payload.JsonFieldType;
 
 import static com.alethio.service.domain.order.step.OrderStep.*;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
 
 public class OrderDocumentationTest extends DocumentationTest {
@@ -24,7 +27,25 @@ public class OrderDocumentationTest extends DocumentationTest {
         // when
         ExtractableResponse<Response> response = RestAssured
                 .given(spec).log().all()
-                .filter(document("order"))
+                .filter(document("order",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        requestFields(
+                                fieldWithPath("contactInfo.contactEmail").type(JsonFieldType.STRING).description("상품 주문인의 이메일 주소"),
+                                fieldWithPath("contactInfo.contactName").type(JsonFieldType.STRING).description("상품 주문인의 이름"),
+                                fieldWithPath("contactInfo.mobile").type(JsonFieldType.STRING).description("상품 주문인의 전화번호"),
+                                fieldWithPath("items.itemType").type(JsonFieldType.STRING).description("상품의 타입 (ex. food, clothes 등..)"),
+                                fieldWithPath("items.id").type(JsonFieldType.NUMBER).description("상품의 아이디")),
+                        responseFields(
+                                fieldWithPath("id").type(JsonFieldType.NUMBER).description("주문 아이디"),
+                                fieldWithPath("orderUser.id").type(JsonFieldType.NUMBER).description("상품 주문인의 아이디"),
+                                fieldWithPath("orderUser.name").type(JsonFieldType.STRING).description("상품 주문인의 이름"),
+                                fieldWithPath("orderUser.email").type(JsonFieldType.STRING).description("상품 주문인의 이메일"),
+                                fieldWithPath("orderUser.mobile").type(JsonFieldType.STRING).description("상품 주문인의 전화번호"),
+                                fieldWithPath("orderItem.id").type(JsonFieldType.NUMBER).description("주문 상품의 아이디"),
+                                fieldWithPath("orderItem.name").type(JsonFieldType.STRING).description("주문 상품의 이름"),
+                                fieldWithPath("orderItem.quantity").type(JsonFieldType.NUMBER).description("주문 상품의 남은 수량"))
+                        ))
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(request)
                 .when().post("/order")
