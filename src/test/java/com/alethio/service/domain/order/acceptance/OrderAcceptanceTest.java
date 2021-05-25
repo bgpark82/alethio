@@ -35,6 +35,19 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         주문_생성_됨(response, "test@test.com","떡볶이", 99);
     }
 
+    @DisplayName("옷을 주문한다")
+    @Test
+    void orderClothes() {
+        // given
+        OrderRequest request = 주문_생성_스텁("test@test.com", "구매자", "01099999999", "clothes", 1L);
+
+        // when
+        ExtractableResponse<Response> response = 주문_생성_요청(request);
+
+        // then
+        주문_생성_됨(response, "test@test.com","A청바지", 99);
+    }
+
     @DisplayName("음식 주문 시, 음식이 존재하지 않으면 에러를 발생시킨다")
     @Test
     void orderFood_IfNoFoodLeft_ThrowException() {
