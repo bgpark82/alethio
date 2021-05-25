@@ -9,6 +9,16 @@
 java -jar ./target/service-0.0.1-SNAPSHOT.jar
 ```
 
+## Documentation
+```
+http://localhost:8080/docs/index.html
+```
+
+## Test
+```
+./mvnw test
+```
+
 ## Convention
 - class : Pascal case
 - variable : Camel case
@@ -28,6 +38,7 @@ src
     └── domain
         └── order
             ├── acceptance
+            ├── documentation
             ├── application
             ├── domain
             ├── step

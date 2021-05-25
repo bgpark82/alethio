@@ -12,9 +12,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 public class StockRequest {
 
-    private static final String CLOTHES_TYPE = "clothes";
-    private static final String FOOD_TYPE = "food";
-    private static final String ENCRYPT_CODE = "123";
     private static final int REQUEST_AMOUNT = 100;
 
     @Id @GeneratedValue(strategy = IDENTITY)
@@ -26,23 +23,11 @@ public class StockRequest {
 
     private int amount;
 
-    public static StockRequest create(String name, String type) {
+    public static StockRequest create(String name, String code) {
         StockRequest stockRequest = new StockRequest();
-        stockRequest.code = getCode(name, type);;
+        stockRequest.code = code;;
         stockRequest.name = name;
         stockRequest.amount = REQUEST_AMOUNT;
         return stockRequest;
-    }
-
-    // TODO: enum으로 분리
-    private static String getCode(String name, String type) {
-        switch (type) {
-            case FOOD_TYPE:
-                return name + ENCRYPT_CODE;
-            case CLOTHES_TYPE:
-                return ENCRYPT_CODE + name;
-            default:
-                return null;
-        }
     }
 }
