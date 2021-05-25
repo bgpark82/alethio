@@ -13,11 +13,13 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 
 import static com.alethio.service.domain.order.step.OrderStep.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("주문 관련 인수 테스트")
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class OrderAcceptanceTest extends AcceptanceTest {
 
     @Autowired
