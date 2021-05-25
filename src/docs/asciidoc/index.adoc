@@ -1,0 +1,7 @@
+This is basic ascii docs
+
+include::{snippets}/order/curl-request.adoc[]
+include::{snippets}/order/http-request.adoc[]
+include::{snippets}/order/request-body.adoc[]
+include::{snippets}/order/http-response.adoc[]
+include::{snippets}/order/response-body.adoc[]
