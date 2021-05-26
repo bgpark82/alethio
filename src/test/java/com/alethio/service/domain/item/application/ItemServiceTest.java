@@ -13,7 +13,7 @@ import org.mockito.Mock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -22,7 +22,7 @@ class ItemServiceTest {
 
     ItemService itemService;
 
-    @Mock ItemRepository itemRepository;
+    @Mock ItemFactory itemFactory;
 
     ItemRequest itemRequestStub;
     Item itemStub;
@@ -31,8 +31,8 @@ class ItemServiceTest {
 
     @BeforeEach
     void setUp() {
-        itemRepository = mock(ItemRepository.class);
-        itemService = new ItemService(itemRepository);
+        itemFactory = mock(ItemFactory.class);
+        itemService = new ItemService(itemFactory);
 
         떡볶이 = "떡볶이";
         남은_재고 = 99;
@@ -45,7 +45,7 @@ class ItemServiceTest {
     @Test
     void getFood() {
         // given
-        when(itemRepository.getItemByType(any()))
+        when(itemFactory.findItemByType(anyLong(), anyString()))
                 .thenReturn(itemStub);
 
         // when
@@ -56,24 +56,13 @@ class ItemServiceTest {
         assertThat(food.getQuantity()).isEqualTo(남은_재고);
     }
 
-    @DisplayName("음식을 조회 시, 음식이 존재하지 않으면 에러를 발생시킨다")
-    @Test
-    void getFood_IfClothesIsNull_ThrowException() {
-        // given
-        // when(itemRepository.getItemByType(any()))
-        //         .thenReturn(Optional.empty());
 
-        // when then
-        // assertThatThrownBy(() -> itemService.getItem(itemRequestStub))
-        //        .hasMessage("존재하지 않는 아이템입니다.")
-        //        .isInstanceOf(ItemNotFoundException.class);
-    }
 
     @DisplayName("음식 조회 시, 재고가 1 감소한다")
     @Test
     void getFood_IfSuccess_DecreaseQuantity() {
         // given
-        when(itemRepository.getItemByType(any()))
+        when(itemFactory.findItemByType(anyLong(), anyString()))
                 .thenReturn(itemStub);
 
         // when
@@ -89,7 +78,7 @@ class ItemServiceTest {
     void getFood_IfNoQuantityLeft_ThrowException() {
         // given
         Item emptyFood = FoodStub.of(1L, 0, 떡볶이);
-        when(itemRepository.getItemByType(any()))
+        when(itemFactory.findItemByType(anyLong(), anyString()))
                 .thenReturn(emptyFood);
 
         // when then
@@ -103,7 +92,7 @@ class ItemServiceTest {
     void getFood_IfLessThan10_StockRequest() {
         // given
         Item shortFood = FoodStub.of(1L, 10, 떡볶이);
-        when(itemRepository.getItemByType(any()))
+        when(itemFactory.findItemByType(anyLong(), anyString()))
                 .thenReturn(shortFood);
 
         // when

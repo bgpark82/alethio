@@ -10,11 +10,17 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ItemService {
 
-    private final ItemRepository itemRepository;
+    private final ItemFactory itemFactory;
 
     public Item getItem(ItemRequest request) {
-        final Item item = itemRepository.getItemByType(request);
+        final Item item = findItemByType(request);
         item.decreaseQuantity();
         return item;
+    }
+
+    private Item findItemByType(ItemRequest request) {
+        return itemFactory.findItemByType(
+                request.getId(),
+                request.getItemType());
     }
 }

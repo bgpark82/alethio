@@ -1,6 +1,6 @@
 package com.alethio.service.domain.item.domain.clothes;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.alethio.service.domain.item.domain.ItemRepository;
 
-public interface ClothesRepository extends JpaRepository<Clothes, Long> {
+public interface ClothesRepository extends ItemRepository<Clothes, Long> {
 }
