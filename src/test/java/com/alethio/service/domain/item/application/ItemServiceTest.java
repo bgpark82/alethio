@@ -1,7 +1,7 @@
 package com.alethio.service.domain.item.application;
 
 import com.alethio.service.domain.item.domain.Item;
-import com.alethio.service.domain.item.domain.ItemRepository;
+import com.alethio.service.domain.item.domain.ItemFactory;
 import com.alethio.service.domain.item.dto.ItemRequest;
 import com.alethio.service.domain.item.dto.ItemRequestStub;
 import com.alethio.service.domain.item.dto.FoodStub;
@@ -22,7 +22,8 @@ class ItemServiceTest {
 
     ItemService itemService;
 
-    @Mock ItemFactory itemFactory;
+    @Mock
+    ItemFactory itemFactory;
 
     ItemRequest itemRequestStub;
     Item itemStub;
@@ -32,7 +33,7 @@ class ItemServiceTest {
     @BeforeEach
     void setUp() {
         itemFactory = mock(ItemFactory.class);
-        itemService = new ItemService(itemFactory);
+        itemService = new ItemServiceImpl(itemFactory);
 
         떡볶이 = "떡볶이";
         남은_재고 = 99;

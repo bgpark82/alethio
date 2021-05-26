@@ -1,15 +1,14 @@
-package com.alethio.service.domain.item.application;
+package com.alethio.service.domain.item.domain;
 
-import com.alethio.service.domain.item.domain.Item;
 import com.alethio.service.domain.item.domain.clothes.ClothesRepository;
 import com.alethio.service.domain.item.domain.food.FoodRepository;
 import com.alethio.service.exception.ItemNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
-@Service
+@Repository
 @RequiredArgsConstructor
-public class ItemFactoryImpl implements ItemFactory{
+public class ItemFactoryImpl implements ItemFactory {
 
     private static final String FOOD_TYPE = "food";
     private static final String CLOTHES_TYPE = "clothes";

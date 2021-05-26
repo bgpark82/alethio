@@ -18,7 +18,7 @@ class StockRequestServiceTest {
     @BeforeEach
     void setUp() {
         stockRequestRepository = mock(StockRequestRepository.class);
-        stockRequestService = new StockRequestService(stockRequestRepository);
+        stockRequestService = new StockRequestServiceImpl(stockRequestRepository);
     }
 
     @DisplayName("재고를 요청한다")

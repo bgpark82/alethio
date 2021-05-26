@@ -1,5 +1,7 @@
 package com.alethio.service.domain.item.application;
 
+import com.alethio.service.domain.item.domain.ItemFactory;
+import com.alethio.service.domain.item.domain.ItemFactoryImpl;
 import com.alethio.service.domain.item.domain.clothes.ClothesRepository;
 import com.alethio.service.domain.item.domain.food.FoodRepository;
 import com.alethio.service.exception.ItemNotFoundException;
