@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
+
 @RestController
 @RequiredArgsConstructor
 @Transactional
@@ -20,6 +22,6 @@ public class OrderController {
     @PostMapping("/order")
     public ResponseEntity orderClothes(@RequestBody OrderRequest request) {
         final OrderResponse response = orderService.orderItem(request);
-        return ResponseEntity.ok().body(response);
+        return ResponseEntity.created(URI.create("/order/" + response.getId())).body(response);
     }
 }

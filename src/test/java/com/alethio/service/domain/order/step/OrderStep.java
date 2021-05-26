@@ -15,8 +15,7 @@ public class OrderStep {
 
     public static void 주문_생성_됨(ExtractableResponse<Response> response, String userEmail, String itemName, int quantity) {
         final OrderResponse orderResponse = response.as(OrderResponse.class);
-        // TODO: 201 응답
-        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
         assertThat(orderResponse.getOrderUser().getEmail()).isEqualTo(userEmail);
         assertThat(orderResponse.getOrderItem().getName()).isEqualTo(itemName);
         assertThat(orderResponse.getOrderItem().getQuantity()).isEqualTo(quantity);
@@ -24,7 +23,6 @@ public class OrderStep {
 
     public static void 주문_생성_실패_됨(ExtractableResponse<Response> response) {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
-        // TODO: BusinessException에서 body 객체 생성 (ex. ErrorCode)
     }
 
     public static ExtractableResponse<Response> 주문_생성_요청(OrderRequest request) {
